@@ -1,5 +1,7 @@
 package com.TestingBee1;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -21,7 +23,7 @@ public class SeleniumPractice2 {
 		driver.manage().timeouts().pageLoadTimeout(6000l, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(3000l, TimeUnit.SECONDS);
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
-		String actual = driver.getTitle();
+		/*String actual = driver.getTitle();
 		String expected = "Practice Page";
 		Assert.assertEquals(actual,expected);
 		System.out.println(driver.getTitle());	
@@ -36,7 +38,7 @@ public class SeleniumPractice2 {
 		}*/
 		
 		
-		driver.findElement(By.xpath("//input[@id='autocomplete']")).clear();
+		/*driver.findElement(By.xpath("//input[@id='autocomplete']")).clear();
 		//Thread.sleep(3000);
 		driver.findElement(By.xpath("//input[@id='autocomplete']")).sendKeys("Bangladeh");
 		//css---input[id='autocomplete']    //
@@ -65,7 +67,19 @@ public class SeleniumPractice2 {
 		action.moveToElement(sdd).click().perform();  //for more function, we use perform method
 		Thread.sleep(3000);
 		WebElement sddd = driver.findElement(By.xpath("//a[text()='Contact info']"));
-		action.moveToElement(sddd).perform();
+		action.moveToElement(sddd).perform();*/
+		driver.findElement(By.xpath("//button[@id='openwindow']")).click();
+		Set<String> window = driver.getWindowHandles();
+		Iterator<String> it = window.iterator();
+		String parent = it.next();
+		String child = it.next();
+		driver.switchTo().window(child);
+		String childtitle = driver.getTitle();
+		System.out.println(childtitle);
+		Assert.assertEquals(childtitle, "QA Click Academy | Selenium,Jmeter,SoapUI,Appium,Database testing,QA Training Academy");
+		
+		
+		
 		Thread.sleep(3000);
 		driver.quit();
 
